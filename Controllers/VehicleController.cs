@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace KTR.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("vehicle")]
     public class VehicleController : ControllerBase
@@ -16,12 +17,23 @@ namespace KTR.Controllers
 
         private readonly VehicleData data = new VehicleData();
 
+        /// <summary>
+        /// Get general information about a vehicle
+        /// </summary>
+        /// <param name="skiltnummer"></param>
         [HttpGet("{skiltnummer}")]
         public KjoretoyRoot Get(string skiltnummer)
         {
             return data.getVehicleByRegisterPlate(skiltnummer);
         }
 
+        /// <summary>
+        /// Get information about a vehicle
+        /// </summary>
+        /// <param name="skiltnummer"></param>
+        /// <returns>Somethinf</returns>
+        /// <response code="200">Returns the newly created item</response>
+        /// <response code="400">If the item is null</response> 
         [HttpGet("description/{skiltnummer}")]
         public IActionResult GetDescription(string skiltnummer)
         {
