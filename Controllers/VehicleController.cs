@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -35,7 +35,7 @@ namespace KTR.Controllers
         /// <response code="200">Returns the newly created item</response>
         /// <response code="400">If the item is null</response> 
         [HttpGet("description/{skiltnummer}")]
-        public IActionResult GetDescription(string skiltnummer)
+        public ActionResult<KjoretoyRoot> GetDescription(string skiltnummer)
         {
             OutData outData = data.getCarDescription(skiltnummer);
             if (outData == null)
