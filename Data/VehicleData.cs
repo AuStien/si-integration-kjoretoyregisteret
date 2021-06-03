@@ -23,11 +23,13 @@ namespace KTR.Data
             }   
         }
 
+        // Henter all data fra KjøretøyRegisteret
         public KjoretoyRoot getVehicleByRegisterPlate(string registerPlate)
         {
             return Fetcher.GetVehicle(registerPlate, apiKey);
         }
 
+        // Henter bare relevant data fra KjøretøyRegisteret
         public OutData getCarDescription(string registerPlate)
         {
             KjoretoyRoot ktr = getVehicleByRegisterPlate(registerPlate);
@@ -37,20 +39,11 @@ namespace KTR.Data
                 getVehicleTypeByObject(ktr),
                 DateTime.Parse(getFirstTimeRegistrationByObject(ktr)),
                 getFuelTypeByObject(ktr));
-         
+
             return result;
         }
 
-        public string getCarBrand(string registerPlate)
-        {
-            KjoretoyRoot ktr = getVehicleByRegisterPlate(registerPlate);
-            if (ktr == null) return "Skiltnummer ble ikke funnet.";
-            string result = getCarBrandByObject(ktr);
-            if (result == null || result == "")
-                return "Merke er ikke tilgjengelig.";
-            else
-                return result;
-        }
+        // Returnerer bilmerke
         public string getCarBrandByObject(KjoretoyRoot ktr) {
             try
             {
@@ -62,16 +55,7 @@ namespace KTR.Data
             }
         }
 
-        public string getVehicleType(string registerPlate)
-        {
-            KjoretoyRoot ktr = getVehicleByRegisterPlate(registerPlate);
-            if (ktr == null) return "Skiltnummer ble ikke funnet.";
-            string result = getVehicleTypeByObject(ktr);
-            if (result == null || result == "")
-                return "Motorvogntype er ikke tilgjengelig.";
-            else
-                return result;
-        }
+        // Returnerer bilmerke
         public string getVehicleTypeByObject(KjoretoyRoot ktr)
         {
             try
@@ -84,16 +68,7 @@ namespace KTR.Data
             }
         }
 
-        public string getFirstTimeRegistration(string registerPlate)
-        {
-            KjoretoyRoot ktr = getVehicleByRegisterPlate(registerPlate);
-            if (ktr == null) return "Skiltnummer ble ikke funnet.";
-            string result = getFirstTimeRegistrationByObject(ktr);
-            if (result == null || result == "")
-                return "Førstegangsregistrering er ikke tilgjengelig.";
-            else
-                return result;
-        }
+        // Returnerer førstegangsregistrering
         public string getFirstTimeRegistrationByObject(KjoretoyRoot ktr)
         {
             try
@@ -106,16 +81,7 @@ namespace KTR.Data
             }
         }
 
-        public string getFuelType(string registerPlate)
-        {
-            KjoretoyRoot ktr = getVehicleByRegisterPlate(registerPlate);
-            if (ktr == null) return "Skiltnummer ble ikke funnet.";
-            string result = getFuelTypeByObject(ktr);
-            if (result == null || result == "")
-                return "Drivstoff er ikke tilgjengelig.";
-            else
-                return result;
-        }
+        // Returnerer drivstofftype
         public string getFuelTypeByObject(KjoretoyRoot ktr)
         {
             try
@@ -135,6 +101,7 @@ namespace KTR.Data
 
         public static class Fetcher
         {
+            // Henter kjøretøydata fra APIet til KjøretøyRegisteret
             public static KjoretoyRoot GetVehicle(string registerPlate, string apiKey)
             {
                 string endPoint = "https://www.vegvesen.no/ws/no/vegvesen/kjoretoy/felles/datautlevering/enkeltoppslag/kjoretoydata?kjennemerke=";

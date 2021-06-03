@@ -18,16 +18,6 @@ namespace KTR.Controllers
         private readonly VehicleData data = new VehicleData();
 
         /// <summary>
-        /// Get general information about a vehicle
-        /// </summary>
-        /// <param name="skiltnummer"></param>
-        [HttpGet("{skiltnummer}")]
-        public KjoretoyRoot Get(string skiltnummer)
-        {
-            return data.getVehicleByRegisterPlate(skiltnummer);
-        }
-
-        /// <summary>
         /// Get information about a vehicle
         /// </summary>
         /// <param name="skiltnummer"></param>
@@ -35,7 +25,7 @@ namespace KTR.Controllers
         /// <response code="200">Returns the newly created item</response>
         /// <response code="400">If the item is null</response> 
         [HttpGet("description/{skiltnummer}")]
-        public ActionResult<KjoretoyRoot> GetDescription(string skiltnummer)
+        public ActionResult<OutData> GetDescription(string skiltnummer)
         {
             OutData outData = data.getCarDescription(skiltnummer);
             if (outData == null)
